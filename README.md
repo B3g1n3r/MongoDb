@@ -1,4 +1,4 @@
-# MongoDbHere’s a single copyable README file with all the MongoDB commands:
+# MongoDb
 
 ```markdown
 # MongoDB Commands and Usage
@@ -132,11 +132,14 @@ db.dropDatabase()
 - **Date:** `new Date()`
 - **Timestamp:** `new Timestamp()`
 
+## OPTIONS
+
+## PROJECTIONS
+ - **example**  db.employee.find({},{_id:0,name:1,wand:1}) `only the name and wand are retrived`
+
 ## Notes
 
 - **Cursor Object:** `db.collectionName.find()` returns only the first 20 records, then "it" iterates through the remaining.
 - **Convert to Array:** `db.collectionName.find().toArray()` returns all records.
 - **Print All Records:** `db.collectionName.find().forEach((doc) => { print(doc) })`
 ```
-
-You can copy and paste this file as a README file for MongoDB usage.
