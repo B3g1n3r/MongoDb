@@ -55,7 +55,14 @@ db.collectionName.find().toArray()
 
 ### Iterate Through Records and Print
 ```javascript
-db.collectionName.find().forEach((doc) => { print(doc) })
+db.collectionName.find().forEach((doc) => { print(doc) }) or printjson -- same output
+db.employee.findOne({school:'Hogwarts'}).name  -- specific value
+```
+
+```
+db.employee.findOne({school:'Hogwarts'}).name  -- specific value
+ db.employee.findOne({},{name:1}) --- only name is visible
+ db.employee.findOne({'wand.wood': 'Ash'}) -- access within the array
 ```
 
 ## Update Operations
@@ -135,7 +142,10 @@ db.dropDatabase()
 ## OPTIONS
 
 ## PROJECTIONS
- - **example**  db.employee.find({},{_id:0,name:1,wand:1}) `only the name and wand are retrived`
+- **example**  db.employee.find({},{_id:0,name:1,wand:1}) `only the name and wand are retrived`
+
+## DATABASE
+
 
 ## Notes
 
@@ -143,3 +153,5 @@ db.dropDatabase()
 - **Convert to Array:** `db.collectionName.find().toArray()` returns all records.
 - **Print All Records:** `db.collectionName.find().forEach((doc) => { print(doc) })`
 ```
+
+
