@@ -117,6 +117,12 @@ db.collectionName.deleteMany({ filter })
 ```
 
 ## Drop Operations
+-  db.stats() - status
+-  db.getName() - current collection name
+-  db.getCollectionNames() - all Collection in the database
+-  db.getCollectionInfos() -- info
+-  db.employee.countDocuments() -- no of document in the collection
+-   db.employee.distinct('wand.wood') -- distinct values
 
 ### Drop a Collection
 ```javascript
