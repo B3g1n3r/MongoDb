@@ -151,8 +151,16 @@ db.dropDatabase()
 - **example**  db.employee.find({},{_id:0,name:1,wand:1}) `only the name and wand are retrived`
 
 ## DATABASE
+ - db.stats()
+ - db.empoyee.distinct('wand.wood')
+ - db.products.countDocuments()
+ - db.getCollectionInfos()
+ - db.getCollectionNames()
+ - db.getName()
 
-
+## Validation
+ db.createCollection('Onepiece', {validator:{$jsonSchema:{ bsonType: 'object', required:['name','power','bounty'], properties:{ name:{bsonType:'string', description:'Must be string and required'},bounty:{bsonType:'int', description:'Must be int and required' }, power:{bsonType:'string', description: 'Must be string and not empty'}}}}})
+ 
 ## Notes
 
 - **Cursor Object:** `db.collectionName.find()` returns only the first 20 records, then "it" iterates through the remaining.
