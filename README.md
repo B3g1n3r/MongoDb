@@ -122,7 +122,7 @@ db.collectionName.deleteMany({ filter })
 -  db.getCollectionNames() - all Collection in the database
 -  db.getCollectionInfos() -- info
 -  db.employee.countDocuments() -- no of document in the collection
--   db.employee.distinct('wand.wood') -- distinct values
+-  db.employee.distinct('wand.wood') -- distinct values
 
 ### Drop a Collection
 ```javascript
@@ -150,16 +150,8 @@ db.dropDatabase()
 ## PROJECTIONS
 - **example**  db.employee.find({},{_id:0,name:1,wand:1}) `only the name and wand are retrived`
 
-## DATABASE
- - db.stats()
- - db.empoyee.distinct('wand.wood')
- - db.products.countDocuments()
- - db.getCollectionInfos()
- - db.getCollectionNames()
- - db.getName()
-
 ## Validation
- db.createCollection('Onepiece', {validator:{$jsonSchema:{ bsonType: 'object', required:['name','power','bounty'], properties:{ name:{bsonType:'string', description:'Must be string and required'},bounty:{bsonType:'int', description:'Must be int and required' }, power:{bsonType:'string', description: 'Must be string and not empty'}}}}})
+-  db.createCollection('Onepiece', {validator:{$jsonSchema:{ bsonType: 'object', required:['name','power','bounty'], properties:{ name:{bsonType:'string', description:'Must be string and required'},bounty:{bsonType:'int', description:'Must be int and required' }, power:{bsonType:'string', description: 'Must be string and not empty'}}}}})
  
 ## Notes
 
