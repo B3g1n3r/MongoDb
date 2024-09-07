@@ -151,7 +151,9 @@ db.dropDatabase()
 - **example**  db.employee.find({},{_id:0,name:1,wand:1}) `only the name and wand are retrived`
 
 ## Validation
--  db.createCollection('Onepiece', {validator:{$jsonSchema:{ bsonType: 'object', required:['name','power','bounty'], properties:{ name:{bsonType:'string', description:'Must be string and required'},bounty:{bsonType:'int', description:'Must be int and required' }, power:{bsonType:'string', description: 'Must be string and not empty'}}}}})
+- db.createCollection('yonkos', {validator:{$jsonSchema:{bsonType:'object', required:['name', 'power'], properties:{ name:{bsonType:'string', description:'must be string'}}}}, validationLevel:'strict',validationAction:'error'});
+
+- db.runCommand({collMod:'yonkos', validator:{$jsonSchema:{bsonType:'object', required:['name', 'power'], properties:{name:{bsonType:'string', description:'must be string'}, power:{bsonType:'string', description:'enter a valid string'}}}}, validationLevel:'strict',validationAction:'error'}); **Modification of validation  **
  
 ## Notes
 
