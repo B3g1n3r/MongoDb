@@ -153,8 +153,26 @@ db.dropDatabase()
 ## Validation
 - db.createCollection('yonkos', {validator:{$jsonSchema:{bsonType:'object', required:['name', 'power'], properties:{ name:{bsonType:'string', description:'must be string'}}}}, validationLevel:'strict',validationAction:'error'});
 
-- db.runCommand({collMod:'yonkos', validator:{$jsonSchema:{bsonType:'object', required:['name', 'power'], properties:{name:{bsonType:'string', description:'must be string'}, power:{bsonType:'string', description:'enter a valid string'}}}}, validationLevel:'strict',validationAction:'error'}); **Modification of validation  **
- 
+- db.runCommand({collMod:'yonkos', validator:{$jsonSchema:{bsonType:'object', required:['name', 'power'], properties:{name:{bsonType:'string', description:'must be string'}, power:{bsonType:'string', description:'enter a valid string'}}}}, validationLevel:'strict',validationAction:'error'}); **Modification of validation  
+
+**Operators**
+- **comparison operator**
+   -  db.onepiece.find({name:{$eq:'kuma'}}) -- $eq equals
+   -  db.onepiece.find({bounty:{$ne:81000000}}) - not equal
+   -  db.onepiece.find({bounty:{$lt:100000000}}) - lower than
+   -  db.onepiece.find({bounty:{$gt:100000000}}) - greater than
+   -  db.onepiece.find({bounty:{$lte:100000000}}) - lower than or equal
+   -  db.onepiece.find({bounty:{$gte:100000000}}) - greater than or equal
+   
+
+- **Logical operators**
+   -  db.onepiece.find({$and:[{name:{$in:['Jinbe', 'Boa Hancock']}}, {bounty:{$gt:43000000}}]})  -- and operator
+   -  db.onepiece.find({$or:[{name:{$in:['Jinbe', 'Boa Hancock']}}, {bounty:{$gt:43000000}}]})  -- or operator
+   -   db.onepiece.find({$nor:[{name:{$in:['Jinbe', 'Boa Hancock']}}, {bounty:{$gt:43000000}}]}) -- nor
+   -   db.onepiece.find({abilities:{$exists:false}})  -- exists check
+   -   db.onepiece.find({ $and: [ { abilities: { $exists: true } }, { bounty: { $lt: 300000000 } } ] }, { name: 1, _id: 0 }) -- example
+   -   db.onepiece.find({name:{$type:'string'}}) -- string
+   -   db.onepiece.find({name:{$nin:['Jinbe','Crocodile']}}) -- not in
 ## Notes
 
 - **Cursor Object:** `db.collectionName.find()` returns only the first 20 records, then "it" iterates through the remaining.
