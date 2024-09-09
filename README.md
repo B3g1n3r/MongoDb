@@ -173,6 +173,7 @@ db.dropDatabase()
    -   db.onepiece.find({ $and: [ { abilities: { $exists: true } }, { bounty: { $lt: 300000000 } } ] }, { name: 1, _id: 0 }) -- example
    -   db.onepiece.find({name:{$type:'string'}}) -- string
    -   db.onepiece.find({name:{$nin:['Jinbe','Crocodile']}}) -- not in
+- ****
 ## Notes
 
 - **Cursor Object:** `db.collectionName.find()` returns only the first 20 records, then "it" iterates through the remaining.
