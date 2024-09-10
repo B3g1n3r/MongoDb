@@ -196,7 +196,9 @@ db.dropDatabase()
    -  **Many to many**
        -  db.events.aggregate([{$lookup:{from:'participations', localField:'_id',foreignField:'event_id', as:'participations'}}, {$unwind:'$participations'},{$lookup:{from:'characters', localField:'participations.character_id', foreignField:'_id', as:'characters'}},{$unwind:'$characters'},{$group:{_id:'$_id',name:{$first:'$name'}, characters:{ $push:'$characters'}}},{$project:{_id:1,name:1, characters:1}}])
     
-       -  db.events.aggregate([{$lookup:{from:'participations', localField:'_id',foreignField:'event_id', as:'participations'}}, {$unwind:'$participations'},{$lookup:{from:'characters', localField:'participations.character_id', foreignField:'_id', as:'characters'}},{$unwind:'$characters'},{$group:{_id:'$_id',name:{$first:'$name'}, characters:{ $push:{character_id: '$characters._id', character_name:'$characters.name', character_role:'$characters.role'}}}},{$project:{_id:1,name:1, characters:1}}])  
+       -  db.events.aggregate([{$lookup:{from:'participations', localField:'_id',foreignField:'event_id', as:'participations'}}, {$unwind:'$participations'},{$lookup:{from:'characters', localField:'participations.character_id', foreignField:'_id', as:'characters'}},{$unwind:'$characters'},{$group:{_id:'$_id',name:{$first:'$name'}, characters:{ $push:{character_id: '$characters._id', character_name:'$characters.name', character_role:'$characters.role'}}}},{$project:{_id:1,name:1, characters:1}}])
+    
+       -   db.characters.aggregate([ { $group: { _id: "$_id", /* Group by city*/ firstAlias: { $first: "$name" } /* Get the first alias for each city*/ } }] )
 ## Notes
 
 - **Cursor Object:** `db.collectionName.find()` returns only the first 20 records, then "it" iterates through the remaining.
