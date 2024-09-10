@@ -179,6 +179,24 @@ db.dropDatabase()
    -  db.onepiece.find({abilities:{$all:['Haki']}}) -- all
    -  db.onepiece.find().sort('bounty') -- ascending
    -  db.onepiece.find().sort({bounty:-1}) -- descending
+   -  db.onepiece.find().sort('bounty').skip(5) -- skip the first 5
+   -  db.onepiece.find().sort('bounty').limit(2) -- first 2
+**OPTIONS**
+   -   db.temp.insertMany([{name:'jon', _id:'abc5'},{name:'wick', _id:'abc2'}],{ordered:false}) -- ONLY INSERT THE NEW ID  / PARTIAL INSERT
+   -   db.onepiece.find({ abilities:{$exists:true}}, {abilities:{$slice:1}}) -- first valie in teh abilities
+   -   db.onepiece.updateOne({name:'Buggy D. clown'},{$set:{name:'Buggy D. clown', power:'Bara Bara no Mi (Chop-Chop Fruit)',"bounty": 15000000, abilities:["Body Disassembly", "Immunity to Cutting Attacks"], "affiliations": ["Buggy's Delivery", "Shichibukai"]}}, {upsert:true})   -- upsert insert if the value doesn't match
+ 
+   -   db.onepiece.findOneAndDelete({},{sort:{age:1}}) -- display and delete 1st one base on age, if age does't present then it will delete the first one
+
+**RELATIONS**
+   -  **one to one**
+       -  db.characters.aggregate([{$lookup:{from:'onepiece', localField:'_id', foreignField:'character_id', as:'details'}}])
+   -  **one to many**
+       - db.crew.aggregate([{$lookup:{from:'onepiece', localField:'_id', foreignField:'crew_id', as:'details'}}])  give all member in the crew
+   -  **Many to many**
+       -  db.events.aggregate([{$lookup:{from:'participations', localField:'_id',foreignField:'event_id', as:'participations'}}, {$unwind:'$participations'},{$lookup:{from:'characters', localField:'participations.character_id', foreignField:'_id', as:'characters'}},{$unwind:'$characters'},{$group:{_id:'$_id',name:{$first:'$name'}, characters:{ $push:'$characters'}}},{$project:{_id:1,name:1, characters:1}}])
+    
+       -  db.events.aggregate([{$lookup:{from:'participations', localField:'_id',foreignField:'event_id', as:'participations'}}, {$unwind:'$participations'},{$lookup:{from:'characters', localField:'participations.character_id', foreignField:'_id', as:'characters'}},{$unwind:'$characters'},{$group:{_id:'$_id',name:{$first:'$name'}, characters:{ $push:{character_id: '$characters._id', character_name:'$characters.name', character_role:'$characters.role'}}}},{$project:{_id:1,name:1, characters:1}}])  
 ## Notes
 
 - **Cursor Object:** `db.collectionName.find()` returns only the first 20 records, then "it" iterates through the remaining.
